@@ -160,7 +160,11 @@ export default function Home() {
         <span className="status">
           {detectedName && `检测到语言：${detectedName} · `}
           {engine &&
-            `引擎：${engine === "google" ? "Google" : "MyMemory"}`}
+            `引擎：${
+              engine === "google" ? "Google" :
+              engine === "mymemory" ? "MyMemory" :
+              engine === "baidu" ? "百度" :
+              engine === "youdao" ? "有道" : engine}`}
         </span>
       </div>
 

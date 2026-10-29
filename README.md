@@ -68,9 +68,9 @@ vercel
 
 | 变量名 | 说明 |
 | --- | --- |
-| `BAIDU_APP_ID` | 百度 APP ID |
-| `BAIDU_APP_KEY` | 百度密钥 |
-| `YOUDAO_APP_KEY` | 有道 appKey |
-| `YOUDAO_APP_SECRET` | 有道 secret |
+| `baidu_app_id` | 百度 APP ID |
+| `baidu_app_key` | 百度密钥 |
+| `youdao_app_key` | 有道 appKey |
+| `youdao_app_secret` | 有道 secret |
 
 添加后重新 Deploy。引擎链变为 `Google → 百度(若配置) → 有道(若配置) → MyMemory`，前端状态栏会显示实际使用的引擎。未配置任何官方 Key 时，行为与之前完全一致（仅 Google + MyMemory）。
