@@ -53,6 +53,24 @@ vercel
 
 ## 限制说明
 
-- Google 公开接口属于非官方端点，Vercel 默认美区部署一般可访问；如所在网络无法直连，会自动回退 MyMemory。
+- Google 公开接口属于非官方端点，Vercel 默认美区部署一般可访问；如所在网络无法直连，会自动回退到下方配置的引擎。
 - MyMemory 免费额度约每日 5000 字符/IP，适合个人轻度使用。
 - 单次翻译文本上限 5000 字符（可在 `app/api/translate/route.ts` 调整）。
+
+## 接入百度 / 有道官方 API（可选，提升质量与稳定性）
+
+默认引擎链为 `Google → MyMemory`。若希望 Google 不可达时改用质量更好的百度 / 有道（而非 MyMemory），可在 Vercel 配置官方 API 的 Key。**免费额度足够个人使用，Key 仅存于环境变量，不进代码**：
+
+1. **百度翻译开放平台**：注册 https://api.fanyi.baidu.com/ → 创建应用（任意类型）→ 拿到 **APP ID** 与 **密钥**
+2. **有道智云**：注册 https://ai.youdao.com/ → 创建应用 → 拿到 **应用ID(appKey)** 与 **应用密钥(secret)**
+
+在 Vercel 项目 **Settings → Environment Variables** 中添加（按你注册的选其一或两者都配）：
+
+| 变量名 | 说明 |
+| --- | --- |
+| `BAIDU_APP_ID` | 百度 APP ID |
+| `BAIDU_APP_KEY` | 百度密钥 |
+| `YOUDAO_APP_KEY` | 有道 appKey |
+| `YOUDAO_APP_SECRET` | 有道 secret |
+
+添加后重新 Deploy。引擎链变为 `Google → 百度(若配置) → 有道(若配置) → MyMemory`，前端状态栏会显示实际使用的引擎。未配置任何官方 Key 时，行为与之前完全一致（仅 Google + MyMemory）。
